@@ -21,7 +21,7 @@ export class ProductCategoryMenuComponent implements OnInit {
         console.log('Product Categories' + JSON.stringify(data, undefined, 4));
         this.productCategories = data;
       }
-    );
+    )
   }  
 
 }
