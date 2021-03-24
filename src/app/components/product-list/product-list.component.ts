@@ -1,7 +1,9 @@
 import { isFormattedError } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/common/cart-item';
 import { Product } from 'src/app/common/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -25,6 +27,7 @@ export class ProductListComponent implements OnInit {
   previousKeyword = null;
 
   constructor(private productListService: ProductService,
+    private cartService: CartService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -50,7 +53,7 @@ export class ProductListComponent implements OnInit {
     // if we have a different keyword than previous
     // set the page number to 1
 
-    if(this.previousKeyword != theKeyword) {
+    if (this.previousKeyword != theKeyword) {
       this.thePageNumber = 1;
     }
 
@@ -59,8 +62,8 @@ export class ProductListComponent implements OnInit {
 
     //search the product using keywords
     this.productListService.searchProductsPaginate(this.thePageNumber - 1,
-                                                   this.thePageSize,
-                                                   theKeyword).subscribe(this.processResult());
+      this.thePageSize,
+      theKeyword).subscribe(this.processResult());
   }
 
   handleListProducts() {
@@ -110,6 +113,15 @@ export class ProductListComponent implements OnInit {
     this.thePageSize = pageSize;
     this.thePageNumber = 1;
     this.listProducts();
+  }
+
+  addToCart(theProduct: Product) {
+
+    console.log(`Adding to cart: ${theProduct}, ${theProduct.unitPrice}`);
+
+    const theCartItem = new CartItem(theProduct);
+
+    this.cartService.addToCart(theCartItem);
   }
 
 }

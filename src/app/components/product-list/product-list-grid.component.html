@@ -16,14 +16,20 @@
               <h1>{{ tempProduct.name }}</h1>
             </a>
             <div class="price">{{ tempProduct.unitPrice }}</div>
-            <a href="#" class="primary-btn">Add to cart</a>
+            <button
+              (click)="addToCart(tempProduct)"
+              class="btn btn-primary btn-small"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
         <!-- Display message no product is found -->
         <div
           *ngIf="products?.length == 0"
           class="alert alert-warning col-md-12"
-          role="alert">
+          role="alert"
+        >
           No products
         </div>
       </div>
@@ -40,13 +46,14 @@
                   [(page)]="thePageNumber"
                   [pageSize]="thePageSize"
                   [collectionSize]="theTotalElements"
-                  [maxSize]=5
+                  [maxSize]="5"
                   [boundaryLinks]="true"
-                  (pageChange)="listProducts()">
+                  (pageChange)="listProducts()"
+                >
                 </ngb-pagination>
               </div>
 
-              <div class="col-md-3 mt-2" style="text-align: right;">
+              <div class="col-md-3 mt-2" style="text-align: right">
                 <span class="mr-2">Page Size</span>
                 <select (change)="updagePageSize($event.target.value)">
                   <option>2</option>
@@ -56,7 +63,6 @@
                   <option>50</option>
                 </select>
               </div>
-
             </div>
           </div>
         </div>

@@ -8,9 +8,9 @@ describe('ProductCategoryMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductCategoryMenuComponent ]
+      declarations: [ProductCategoryMenuComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
